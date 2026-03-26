@@ -1,5 +1,5 @@
 # search_my_lectures
-A tool that helps your search for a specific term and it's surroundings in the lecture slides (in .pdf format) and provide your with the matches along with the filename and page number 
+A Bash tool for searching lecture slide PDFs for a term and nearby context, then reporting the matching file and page.
 
 ## Prerequisites
 
@@ -9,16 +9,27 @@ A tool that helps your search for a specific term and it's surroundings in the l
 
 - macOS
 
-## Usage 
+## Usage
 
-- If you want to output only to the terminal
-
-```bash 
-./search_my_lectures <regex-for-filenames> <search-term>
+```bash
+./search_my_lectures.sh [options] <filename-regex> <search-term>
 ```
 
-- If you want to output only to the terminal AND a markdown file for the matches
+## Options
 
-```bash 
-./search_my_lectures -m <regex-for-filenames> <search-term>
+- `-m`, `--markdown`: export matches to `search_results.md`
+- `--dir PATH`: search PDFs under a specific directory
+- `--recursive`: include PDFs in subdirectories
+- `--case-sensitive`: match the term with case sensitivity
+- `--ignore-case`: match the term without case sensitivity
+- `--whole-word`: match the term as a whole word
+- `--phrase`: match the term as a literal phrase
+- `-h`, `--help`: show usage
+
+## Examples
+
+```bash
+./search_my_lectures.sh 'lecture.*pdf' 'Bayes theorem'
+./search_my_lectures.sh --dir ~/Courses --recursive -m 'week[0-9]+.*pdf' 'gradient descent'
+./search_my_lectures.sh --whole-word --case-sensitive 'slides.*pdf' 'entropy'
 ```
